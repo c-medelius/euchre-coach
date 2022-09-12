@@ -1,0 +1,873 @@
+* {
+    box-sizing: border-box;
+  }
+
+body{
+    background: radial-gradient(circle, rgba(53,101,77,1) 3%, rgba(15,37,26,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color:white;
+    font-family: "Courier New";
+    margin: 0;
+    padding: 0;
+}
+
+/***************** Top menu bar ******************/
+#topbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3rem;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 25px;
+    background-color: black;
+    padding-top: .7rem;
+    padding-left: 2rem;
+    display: grid;
+    grid-template-columns: 15% 50%;
+    padding-bottom: .5rem;
+    align-content: center;
+    align-items: center;
+}
+.buttons{
+    display: grid;
+    grid-template-columns: 12% 12% 12%;
+    grid-column: 2;
+    column-gap: 1rem;
+    top: 0;
+}
+#buttons button {
+    background: none;
+    border: 1px solid #fff;
+    outline: none;
+    font: inherit;
+    font-size: 0.75rem;
+    color: #fff;
+    cursor: pointer;
+}
+#topbar button:hover {
+    background-color: #fff;
+    color: #444;
+}
+
+
+/***************** Main grid display ******************/
+.main-wrapper{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: auto;
+    padding-top: 5rem;
+    padding-right: 2rem;
+    padding-left: 2rem; 
+}
+
+.leftside{
+    grid-column: 1;
+    float: left;
+}
+.rightside{
+    grid-column: 2;
+    float: left;
+}
+.bottom {
+    grid-column: 1/3;
+    grid-row: 2;
+    align-items: center;
+}
+
+/***************** Alert message box ******************/
+#round-alert-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    display:none;
+}
+#round-alert-box {
+    position: absolute;
+    z-index: 100;
+    width: 30%;
+    height: 15%;
+    padding: 20px;
+    padding-top: 16px;
+    font-size: 15px;
+    top: 16rem;
+    left: 3rem;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    margin-bottom: 10%;
+    text-justify: center;
+}
+#round-alert-text {
+    color: white;
+}
+.close-btn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover {
+    color: black;
+}
+
+/***************** Left side deck items ******************/
+.decks{
+    display:grid;
+    grid-template-columns: repeat(7, 65px);
+    grid-template-rows: repeat(4, 100px), 1fr;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    z-index: 0;
+}
+.deckcard{
+    width: 65px;
+    z-index: 0;
+    height: 100px;
+    position:relative;
+    box-sizing:border-box;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 1px solid black; 
+    border-radius: 6px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.deckcard:hover {
+    border: 1px solid white;
+    border-radius: 6px;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.25), 0 8px 8px 0 rgba(0,0,0, 0.19);
+}
+.deckcard .shade {
+    width: 103%;
+    height: 102%;
+    box-sizing:border-box;
+    position: absolute;
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    flex-grow: 1;
+    background-size: 100% 100%;
+}
+.deckcard .inhand {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    left: -.5%;
+    background: rgba(0, 106, 48, 0.9);
+    border: 1px solid black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 12px;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+.deckcard .upcard {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    left: -.5%;
+    background: rgba(90, 0, 0, 0.9);
+    border: 1px solid black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 10px;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#trumpsuit-label {
+    padding-top: 1%;
+    font-size: 20px;
+}
+
+/***************** Table on right side ******************/
+
+.table{
+    display:grid;
+    grid-template-columns: 130px 10px 100px 0px 30px 0px 100px 10px 130px;
+    grid-template-rows: 50px 50px 10px 100px 0px 50px 0px 100px 10px 75px;
+    align-items: center;
+    justify-items: center;
+}
+
+.prompt{
+    grid-column: 1/10;
+    grid-row: 1;
+    text-align: center;
+    justify-content: center;
+    padding-top: 5px;
+    width: 100%;
+    height: 50%;
+    border-radius: 5px;
+    background-color: black; 
+    font-size: 15px;
+}
+
+
+
+/***************** Round build items ******************/
+input[type=text]{
+    width: 100%;
+    color: white;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: "Courier New";
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    z-index: 9;
+}
+input[type=radio]{
+    width: 100%;
+    accent-color: #F9C80E;
+    background-color: transparent;
+    outline: #F9C80E;
+    grid-column: 2;
+    grid-row: 1;
+    top: 0;
+    align-self: center;
+    justify-self: center;
+    z-index: 9;
+    border: 2px solid black;
+    background-color: none;
+}
+
+#next-btn{
+    grid-column: 10;
+    grid-row: 1;
+    width: 20%;
+    left: 0;
+    justify-self:flex-start;
+    background: rgb(168, 255, 220);
+    border: none;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: none;
+    z-index: 0;
+}
+#start-btn{
+    grid-column: 10;
+    grid-row: 1;
+    width: 40%;
+    left: 0;
+    justify-self:flex-start;
+    background: rgb(19, 151, 98);
+    border: none;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: none;
+    z-index: 0;
+}
+#next-btn:hover {
+    background:rgb(68, 96, 84);
+}
+#start-btn:hover {
+    background:rgb(68, 96, 84);
+}
+#next-btn:disabled {
+    background: lightgray;
+    color: rgb(74, 74, 74);
+}
+
+#build-hand1 {
+    transform: rotate(-45deg);
+    margin-left: 20px;
+}
+#build-hand2 {
+    transform: rotate(-22deg);
+    margin-left: 40px;
+}
+#build-hand3 {
+    transform: rotate(0deg);
+    margin-left: 60px;
+}
+#build-hand4 {
+    transform: rotate(22deg);
+    margin-left: 80px;
+}
+#build-hand5 {
+    transform: rotate(45deg);
+    margin-left: 100px;
+}
+
+#orderedup-prompt{
+    grid-column: 3/8;
+    width: 100%;
+    height: 100%;
+    grid-row: 1/3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% 20% 30%;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    justify-self: center;
+    column-gap: 1rem;
+    display: none;
+}
+#yes-btn{
+    background-color: rgb(0, 0, 0);
+    border: 1px solid white;
+    grid-column: 1;
+    grid-row: 2;
+    height: 100%;
+    outline: none;
+    color: white;
+}
+#no-btn{
+    background-color: #000000;
+    border: 1px solid white;
+    height: 100%;
+    grid-column: 2;
+    grid-row: 2;
+    outline: none;
+    color: white;
+}
+#yes-btn:hover{
+    background-color: #282828;
+}
+#no-btn:hover{
+    background-color: #282828;
+}
+#yes-btn:focus{
+    background-color: #282828;
+}
+#no-btn:focus{
+    background-color: #282828;
+}
+
+#trumpsuit-prompt{
+    grid-column: 4/6;
+    width: 100%;
+    height: 100%;
+    grid-row: 1/3;
+    /* display: grid; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 40% 30% 30%;
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    justify-self: center;
+    text-align: center;
+    display: none;
+}
+.trump-btn:hover {
+    text-shadow: 
+        1px 1px 1px rgba(0, 255, 0, 0.2),
+        -1px -1px 1px rgba(0, 255, 0, 0.2),
+        1px 0px 1px rgba(0, 255, 0, 0.2),
+        0px 1px 1px rgba(0, 255, 0, 0.2),
+        -1px 0px 1px rgba(0, 255, 0, 0.2),
+        0px -1px 1px rgba(0, 255, 0, 0.2),
+        0px 0px 1px rgba(0, 255, 0, 0.2),
+        1px -1px 1px rgba(0, 255, 0, 0.2),
+        -1px 1px 1px rgba(0, 255, 0, 0.2);
+}
+.trump-btn:focus {
+    text-shadow: 
+        1px 1px 1px rgba(0, 255, 0, 0.2),
+        -1px -1px 1px rgba(0, 255, 0, 0.2),
+        1px 0px 1px rgba(0, 255, 0, 0.2),
+        0px 1px 1px rgba(0, 255, 0, 0.2),
+        -1px 0px 1px rgba(0, 255, 0, 0.2),
+        0px -1px 1px rgba(0, 255, 0, 0.2),
+        0px 0px 1px rgba(0, 255, 0, 0.2),
+        1px -1px 1px rgba(0, 255, 0, 0.2),
+        -1px 1px 1px rgba(0, 255, 0, 0.2);
+}
+
+#spades-btn{
+    background-color: transparent;
+    border: none;
+    grid-column: 1;
+    grid-row: 2;
+    height: 100%;
+    font-size: 30px;
+    color: black;
+}
+#hearts-btn{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 30px;
+    color: red;
+}
+#clubs-btn{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    grid-column: 3;
+    grid-row: 2;
+    font-size: 30px;
+    color: black;
+}
+#diams-btn{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    grid-column: 4;
+    grid-row: 2;
+    font-size: 30px;
+    color: red;
+}
+
+#build-alert-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    display: none;
+}
+#build-alert-box {
+    position: absolute;
+    z-index: 9%;
+    width: 30%;
+    height: 15%;
+    padding: 20px;
+    padding-top: 16px;
+    font-size: 15px;
+    top: 16rem;
+    left: 3rem;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    margin-bottom: 10%;
+    text-justify: center;
+}
+#build-alert-text {
+    color: white;
+}
+.close-btn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover {
+    color: black;
+}
+
+#upcard-text{
+    grid-row: 5;
+    grid-column: 5;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    text-align: center;
+    z-index: 0;
+    display: none;
+}
+#upcard-slot{
+    width: 65px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 65px 100px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    grid-row: 6; 
+    grid-column: 5;
+    border-radius: 5px;
+    justify-content: center;
+    z-index: 2;
+    display: none;
+}
+.upcard-img{
+    width: 65px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 65px 100px;
+    grid-row: 1;
+    z-index: 3;
+}
+
+
+/***************** Player 0 items ******************/
+.P0{
+    grid-column: 5;
+    grid-row: 10;
+    width: 130px;
+    height: 100%;
+    align-items: center;
+    font-size: 13px;
+}
+.P0Grid{
+    display:grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 40% 60%;
+}  
+.P0Name{
+    grid-column: 1;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+} 
+.P0Score{
+    grid-column: 2;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+}
+.P0Void{
+    grid-column: 1/3;
+    grid-row: 2;
+    height: 2.5rem;
+    text-align: center;
+    text-justify: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+}
+.P0CardSlot{
+    grid-column: 5;
+    grid-row: 8;
+    width: 65px;
+    height: 100px;
+    border-radius: 5px;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+/***************** Player 1 items ******************/
+.P1{
+    grid-column: 1;
+    grid-row: 6;
+    width: 130px;
+    align-items: center;
+    font-size: 13px;
+    height: 50%;
+}
+.P1Grid{
+    display:grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 40% 60%;
+}  
+.P1Name{
+    grid-column: 1;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+} 
+.P1Score{
+    grid-column: 2;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+}
+.P1Void{
+    grid-column: 1/3;
+    grid-row: 2;
+    height: 2.5rem;
+    text-align: center;
+    text-justify: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+}
+.P1CardSlot{
+    grid-column: 3;
+    grid-row: 6;
+    width: 65px;
+    height: 100px;
+    border-radius: 5px;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transform: rotate(90deg);
+}
+
+/***************** Player 2 items ******************/
+.P2{
+    grid-column: 5;
+    grid-row: 2;
+    width: 130px;
+    align-items: center;
+    font-size: 13px;
+}
+.P2Grid{
+    display:grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 60% 40%;
+}  
+input[id="P2name-input"]{
+    grid-row: 2;
+}
+#P2dealer-input{
+    grid-row: 2;
+}
+#P2maker-input{
+    grid-row: 2;
+}
+.P2Name{
+    grid-column: 1;
+    grid-row: 2;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 2;
+} 
+.P2Score{
+    grid-column: 2;
+    grid-row: 2;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 2;
+}
+.P2Void{
+    grid-column: 1/3;
+    grid-row: 1;
+    height: 2rem;
+    text-align: center;
+    vertical-align: 10%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+}
+.P2CardSlot{
+    grid-column: 5;
+    grid-row: 4;
+    width: 65px;
+    height: 100px;
+    border-radius: 5px;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+/***************** Player 3 items ******************/
+.P3{
+    grid-column: 9;
+    grid-row: 6;
+    width: 130px;
+    align-items: center;
+    font-size: 13px;
+    height: 50%;
+}
+.P3Grid{
+    display:grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 40% 60%;
+}  
+.P3Name{
+    grid-column: 1;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+} 
+.P3Score{
+    grid-column: 2;
+    border: 1px solid white;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 0;
+    grid-row: 1;
+}
+.P3Void{
+    grid-column: 1/3;
+    grid-row: 2;
+    height: 2.5rem;
+    text-align: center;
+    text-justify: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+}
+.P3CardSlot{
+    grid-column: 7;
+    grid-row: 6;
+    width: 65px;
+    height: 100px;
+    border-radius: 5px;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transform: rotate(90deg);
+}
+
+.tablecard{
+    width: 65px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: 65px 100px;
+}
+
+/***************** Bottom grid ******************/
+
+.bottomgrid{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 100%;
+}
+.hand {
+    width: 30%;
+    height: 100%;
+    grid-column: 2;
+    justify-self: center;
+}
+.cardtip {
+    width: 85%;
+    height: 200px;
+    grid-column: 3;
+    background-color: rgb(0, 0, 0, .3);
+    padding: 1rem;
+    display: none;
+    font-size: 13px;
+}
+
+/***************** Hand items ******************/
+
+.cardinhand {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 120px 200px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0), 0 8px 8px 0 rgba(0, 0, 0, 0);
+    pointer-events: auto;
+}
+.handslot {
+    width: 120px;
+    height: 200px;
+    display: flex;
+    position:absolute;
+    transform-origin: bottom center;
+    background-repeat: no-repeat;
+    background-size: 120px 200px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.cardinhand .shade {
+    width: 102%;
+    height: 102%;
+    box-sizing: border-box;
+    position: absolute;
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    flex-grow: 1;
+    background-size: 100% 100%;
+}
+.cardinhand:hover {
+    border: 1px solid white;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.25), 0 8px 8px 0 rgba(0,0,0, 0.19);
+}
+.cardinhand .playable {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid green;
+}
+
+#hand1 {
+    transform: rotate(-45deg);
+    margin-left: 20px;
+}
+#hand2 {
+    transform: rotate(-22deg);
+    margin-left: 40px;
+}
+#hand3 {
+    transform: rotate(0deg);
+    margin-left: 60px;
+}
+#hand4 {
+    transform: rotate(22deg);
+    margin-left: 80px;
+}
+#hand5 {
+    transform: rotate(45deg);
+    margin-left: 100px;
+}
+
+/***************** "About box" items ******************/
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+  
+.about-content {
+    background-color: #000000;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+  
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

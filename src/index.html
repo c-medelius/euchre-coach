@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <script src="game.js" type="module"></script>
+</head>
+
+<body>
+
+    <!-- display for top bar -->
+    <div class="topbar" id="topbar">
+        <div class="title" id="title">Euchre Coach</div>
+        <div class="buttons" id="buttons">
+            <button type="button" id="about-btn">About</button>
+            <button type="button" id="new-round-btn">New Round</button>
+            <!-- <button type="button" id="undoplay-btn">Undo Play</button> -->
+        </div>
+    </div>
+
+    <div id="about-box" class="modal">
+        <div class="about-content">
+            <span class="close-btn" id="about-close-btn">&times;</span>
+            <p>
+                Hi! Welcome to your Euchre Coach.<br><br>
+
+                This Euchre Coach was designed to be a "perfect memory" for a player of the midwestern card game Euchre.
+                I made it to help me better understand the game and its strategies, because it was hard for me to fully understand certain strategies without seeing them played out.<br><br>
+                
+                You can use it to visualize and play through strategies for practice,
+                or for (perfectly legal!) card-counting during a game on another device.<br><br>
+                
+                Enjoy.
+                </p>
+        </div>
+    </div>
+
+    <!-- display for playing the game -->
+    <div class="round-page" id="round-page">
+        <div class="main-wrapper">            
+            <div class="leftside">
+                <div class="decks" id="decks"></div>
+                <div class="alertoverlay" id="round-alert-overlay">
+                    <div class="alert" id="round-alert-box">
+                        <span class="close-btn" id="round-alert-close-btn">&times;</span>
+                        <div class="alert-text" id="round-alert-text"></div>
+                    </div>
+                </div>
+                <div class="trumpsuit" id="trumpsuit-label"></div>
+            </div>
+            
+            <div class="rightside">
+                <div class="table">
+                    <div class="prompt" id="playprompt"></div>
+                    <div class="P0" id="P0">
+                        <div class="P0Grid" id="P0Grid">
+                            <div class="P0Name" id="P0Name"></div>
+                            <div class="P0Score" id="P0Score"></div>
+                            <div class="P0Void" id="P0Void"></div>
+                        </div>
+                    </div>
+                    <div class="P0CardSlot" id="P0CardSlot"></div>
+                    <div class="P1" id="P1">
+                        <div class="P1Grid" id="P1Grid">
+                            <div class="P1Name" id="P1Name"></div>
+                            <div class="P1Score" id="P1Score"></div>
+                            <div class="P1Void" id="P1Void"></div>
+                        </div>
+                    </div>
+                    <div class="P1CardSlot" id="P1CardSlot"></div>
+    
+                    <div class="P2" id="P2">
+                        <div class="P2Grid" id="P2Grid">
+                            <div class="P2Name" id="P2Name"></div>
+                            <div class="P2Score" id="P2Score"></div>
+                            <div class="P2Void" id="P2Void"></div>
+                        </div>
+                    </div>
+                    <div class="P2CardSlot" id="P2CardSlot"></div>
+    
+                    <div class="P3" id="P3">
+                        <div class="P3Grid" id="P3Grid">
+                            <div class="P3Name" id="P3Name"></div>
+                            <div class="P3Score" id="P3Score"></div>
+                            <div class="P3Void" id="P3Void"></div>
+                        </div>
+                    </div>
+                    <div class="P3CardSlot" id="P3CardSlot"></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottomgrid">
+                    <div class="hand" id="hand">
+                        <div class="handslot" id="hand1"></div>
+                        <div class="handslot" id="hand2"></div>
+                        <div class="handslot" id="hand3"></div>
+                        <div class="handslot" id="hand4"></div>
+                        <div class="handslot" id="hand5"></div>
+                    </div>
+                    <div class="cardtip" id="hint1"></div>
+                    <div class="cardtip" id="hint2"></div>
+                    <div class="cardtip" id="hint3"></div>
+                    <div class="cardtip" id="hint4"></div>
+                    <div class="cardtip" id="hint5"></div>
+                    <div class="cardtip" id="hint-general"></div>
+                </div>             
+            </div>
+        </div>
+    </div>    
+
+    <!-- display for setting up a new round -->
+    <div class="build-page" id="build-page">
+        <div class="main-wrapper">
+            <div class="leftside">
+                <div class="decks" id="build-decks"></div>
+                <div class="alertoverlay" id="build-alert-overlay">
+                    <div class="alert" id="build-alert-box">
+                        <span class="close-btn" id="build-alert-close-btn">&times;</span>
+                        <div class="alert-text" id="build-alert-text"></div>
+                    </div>
+                </div>
+                <div class="trumpsuit" id="build-trumpsuit-label"></div>
+            </div>
+            
+            <div class="rightside">
+                <div class="table">
+                    <div class="prompt" id="stepprompt"></div>
+                    <button type="button" id="next-btn">Next</button>
+                    <button type="button" id="start-btn">Start round!</button>
+        
+                    <div class="questions" id="orderedup-prompt">
+                        <button type="button" name="orderedup-input" id="yes-btn">Yes</button>
+                        <button type="button" name="orderedup-input" id="no-btn">No</button>
+                    </div>
+        
+                    
+                    <div class="questions" id="trumpsuit-prompt">
+                        <button type="button" name="trumpsuit-input" class="trump-btn" id="spades-btn">&spades;</button>
+                        <button type="button" name="trumpsuit-input" class="trump-btn" id="hearts-btn">&hearts;</button>
+                        <button type="button" name="trumpsuit-input" class="trump-btn" id="clubs-btn">&clubs;</button>
+                        <button type="button" name="trumpsuit-input" class="trump-btn" id="diams-btn">&diams;</button>
+                    </div>
+
+                    <div class="upcard-text" id="upcard-text">upcard</div>
+                    <div class="upcard-slot" id="upcard-slot"></div>
+
+                    <div class="P0" id="P0">
+                        <div class="P0Grid" id="P0Grid">
+                            <div class="P0Name" id="P0Name"></div>
+                            <input type="text" name="name-input" id="P0name-input" autocomplete="off">
+                            <div class="P0Score" id="P0Score"></div>
+                            <input type="radio" name="dealer-input" id="P0dealer-input">
+                            <input type="radio" name="maker-input" id="P0maker-input">
+                            <div class="P0Void" id="P0Void"></div>
+                        </div>
+                    </div>
+                    <div class="P0CardSlot" id="P0CardSlot"></div>
+
+                    <div class="P1" id="P1">
+                        <div class="P1Grid" id="P1Grid">
+                            <div class="P1Name" id="P1Name"></div>
+                            <input type="text" name="name-input" id="P1name-input" autocomplete="off">
+                            <div class="P1Score" id="P1Score"></div>
+                            <input type="radio" name="dealer-input" id="P1dealer-input">
+                            <input type="radio" name="maker-input" id="P1maker-input">
+                            <div class="P1Void" id="P1Void"></div>
+                        </div>
+                    </div>
+                    <div class="P1CardSlot" id="P1CardSlot"></div>
+    
+                    <div class="P2" id="P2">
+                        <div class="P2Grid" id="P2Grid">
+                            <div class="P2Name" id="P2Name"></div>
+                            <input type="text" name="name-input" id="P2name-input" autocomplete="off">
+                            <div class="P2Score" id="P2Score"></div>
+                            <input type="radio" name="dealer-input" id="P2dealer-input">
+                            <input type="radio" name="maker-input" id="P2maker-input">
+                            <div class="P2Void" id="P2Void"></div>
+                        </div>
+                    </div>
+                    <div class="P2CardSlot" id="P2CardSlot"></div>
+    
+                    <div class="P3" id="P3">
+                        <div class="P3Grid" id="P3Grid">
+                            <div class="P3Name" id="P3Name"></div>
+                            <input type="text" name="name-input" id="P3name-input" autocomplete="off">
+                            <div class="P3Score" id="P3Score"></div>
+                            <input type="radio" name="dealer-input" id="P3dealer-input">
+                            <input type="radio" name="maker-input" id="P3maker-input">
+                            <div class="P3Void" id="P3Void"></div>
+                        </div>
+                    </div>
+                    <div class="P3CardSlot" id="P3CardSlot"></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottomgrid">
+                    <div class="hand" id="hand">
+                        <div class="handslot" id="build-hand1"></div>
+                        <div class="handslot" id="build-hand2"></div>
+                        <div class="handslot" id="build-hand3"></div>
+                        <div class="handslot" id="build-hand4"></div>
+                        <div class="handslot" id="build-hand5"></div>
+                    </div>
+                </div>             
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
